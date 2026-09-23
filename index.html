@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Yinhao Ding — Mathematics, Xinjiang University</title>
+<meta name="description" content="Yinhao Ding, undergraduate in Mathematics and Applied Mathematics at Xinjiang University. Research on fixed/prescribed-time synchronization and intermittent control of stochastic multilayer networks.">
+<meta name="keywords" content="Yinhao Ding, Xinjiang University, stochastic multilayer networks, fixed-time synchronization, prescribed-time synchronization, intermittent control, quantized control, deception attacks">
+<meta name="author" content="Yinhao Ding">
+<link rel="canonical" href="https://yinhaoding.github.io/">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="Yinhao Ding">
+<meta property="og:description" content="Undergraduate researcher in stochastic networked systems and control, Xinjiang University.">
+<meta property="og:url" content="https://yinhaoding.github.io/">
+<meta property="og:image" content="https://yinhaoding.github.io/assets/avatar.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230173BC'/%3E%3Ctext x='32' y='43' text-anchor='middle' font-family='Georgia,serif' font-size='30' font-weight='600' fill='white'%3EYD%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link id="webfonts" rel="stylesheet" media="print" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap">
+<script>
+  // Load web fonts without blocking the first paint (important where Google Fonts is slow or unreachable).
+  (function (l) { if (!l) return; if (l.sheet) { l.media = 'all'; } else { l.addEventListener('load', function () { l.media = 'all'; }); } })(document.getElementById('webfonts'));
+  // Apply a saved light/dark choice before paint.
+  try { var t = localStorage.getItem('yd-theme'); if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t); } catch (e) {}
+</script>
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600&family=STIX+Two+Text:ital,wght@0,400;0,600;1,400&display=swap"></noscript>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Yinhao Ding",
+  "email": "mailto:yinhao_ding@163.com",
+  "url": "https://yinhaoding.github.io/",
+  "affiliation": { "@type": "CollegeOrUniversity", "name": "Xinjiang University" },
+  "knowsAbout": ["Stochastic multilayer networks", "Fixed-time synchronization", "Intermittent control", "Quantized control", "Deception attacks"]
+}
+</script>
+<style>
+:root {
+  --paper: #FBFCFD;
+  --surface: #F0F4F8;
+  --ink: #15233A;
+  --muted: #566275;
+  --accent: #0173BC;       /* the blue of the portrait background */
+  --accent-ink: #015A93;
+  --accent-soft: #E2EDF7;
+  --gold: #C07F0C;
+  --rule: #DAE1EA;
+  --serif: "STIX Two Text", "Source Serif 4", Georgia, "Times New Roman", "Songti SC", SimSun, serif;
+  --sans: "Instrument Sans", system-ui, -apple-system, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  --bar-h: 56px;
+  color-scheme: light;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #0C1420; --surface: #13202F; --ink: #E3E9F2; --muted: #98A5B8;
+    --accent: #5DB1EE; --accent-ink: #8CC8F4; --accent-soft: #163049; --gold: #EDB54A; --rule: #243349;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --paper: #0C1420; --surface: #13202F; --ink: #E3E9F2; --muted: #98A5B8;
+  --accent: #5DB1EE; --accent-ink: #8CC8F4; --accent-soft: #163049; --gold: #EDB54A; --rule: #243349;
+  color-scheme: dark;
+}
+*, *::before, *::after { box-sizing: inherit; }
+html { scroll-padding-top: calc(env(safe-area-inset-top, 0px) + var(--bar-h) + 16px); scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body {
+  margin: 0; background: var(--paper); color: var(--ink);
+  font: 400 17px/1.66 var(--serif);
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+}
+img { max-width: 100%; }
+a { color: var(--accent-ink); text-decoration: underline; text-decoration-color: color-mix(in srgb, var(--accent) 35%, transparent); text-underline-offset: 3px; text-decoration-thickness: 1px; }
+a:hover { text-decoration-color: currentColor; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+::selection { background: var(--accent-soft); }
+strong { font-weight: 600; }
+
+.skip { position: absolute; left: -999px; top: 8px; z-index: 50; background: var(--ink); color: var(--paper); padding: 8px 12px; border-radius: 6px; font: 500 14px var(--sans); }
+.skip:focus { left: 12px; }
+
+/* ---------- top bar ---------- */
+.topbar {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--rule);
+}
+.topbar-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; height: var(--bar-h); display: flex; align-items: center; gap: 20px; }
+.brand { font: 600 19px/1 var(--serif); color: var(--ink); text-decoration: none; white-space: nowrap; }
+.nav { display: flex; gap: 2px; margin-left: auto; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.nav::-webkit-scrollbar { display: none; }
+/* on narrow screens the nav scrolls sideways; fade its right edge while more links are hidden */
+.nav.has-more { -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); mask-image: linear-gradient(to right, #000 calc(100% - 36px), transparent); }
+.nav a { font: 500 14px/1 var(--sans); color: var(--muted); padding: 9px 10px; border-radius: 6px; text-decoration: none; white-space: nowrap; }
+.nav a:hover { color: var(--ink); background: var(--surface); }
+.nav a.active { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); border-radius: 0; }
+.icon-btn { flex: none; width: 36px; height: 36px; display: grid; place-items: center; border: 1px solid var(--rule); border-radius: 8px; background: transparent; color: var(--muted); cursor: pointer; }
+.icon-btn:hover { color: var(--ink); border-color: var(--muted); }
+.icon-btn svg { width: 17px; height: 17px; }
+.i-sun { display: none; }
+:root[data-theme="dark"] .i-sun { display: block; }
+:root[data-theme="dark"] .i-moon { display: none; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .i-sun { display: block; }
+  :root:not([data-theme="light"]) .i-moon { display: none; }
+}
+
+/* ---------- layout ---------- */
+.layout { max-width: 1120px; margin: 0 auto; padding: 44px 24px 72px; display: grid; grid-template-columns: 248px minmax(0, 1fr); gap: 60px; }
+.profile { align-self: start; }
+@media (min-width: 900px) and (min-height: 760px) {
+  .profile { position: sticky; top: calc(env(safe-area-inset-top, 0px) + var(--bar-h) + 36px); }
+}
+.portrait { display: block; width: 100%; height: auto; max-width: 216px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 6px; background: var(--accent); }
+.profile h1 { font: 600 31px/1.12 var(--serif); margin: 22px 0 8px; letter-spacing: -0.005em; }
+.role { font: 400 14.5px/1.55 var(--sans); color: var(--muted); margin: 0; }
+.role a { color: var(--muted); }
+.contact { list-style: none; padding: 0; margin: 22px 0 0; display: grid; gap: 4px; }
+.contact a { display: flex; align-items: center; gap: 10px; font: 500 14.5px/1.4 var(--sans); color: var(--ink); text-decoration: none; padding: 5px 0; word-break: break-all; }
+.contact a:hover { color: var(--accent-ink); }
+.contact svg { flex: none; width: 17px; height: 17px; color: var(--accent); }
+
+main { min-width: 0; max-width: 740px; }
+section { margin-top: 68px; }
+section:first-child { margin-top: 0; }
+h2 { font: 600 27px/1.2 var(--serif); margin: 0 0 18px; display: flex; align-items: center; gap: 18px; }
+h2::after { content: ""; flex: 1; height: 1px; background: var(--rule); }
+.lede { color: var(--muted); font-size: 16px; margin: -8px 0 10px; }
+p { margin: 0 0 14px; }
+.sub { font: 600 15px/1.4 var(--sans); color: var(--ink); margin: 28px 0 6px; }
+
+.interests { margin: 6px 0 0; padding-left: 1.1em; }
+.interests li { margin: 3px 0; }
+.interests li::marker { color: var(--accent); }
+
+/* ---------- synchronization figure ---------- */
+.figure { margin: 26px 0 26px; background: var(--surface); border-radius: 8px; padding: 14px 14px 12px; }
+.figure canvas { display: block; width: 100%; }
+.figure figcaption { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; margin-top: 10px; font: 400 13.5px/1.55 var(--sans); color: var(--muted); }
+.figure figcaption p { margin: 0; }
+.key { display: inline-block; width: 14px; height: 3px; border-radius: 2px; vertical-align: middle; margin: 0 4px 2px 0; }
+.key-node { background: var(--accent); opacity: .7; }
+.key-target { background: var(--gold); height: 4px; }
+.key-on { background: color-mix(in srgb, var(--accent) 22%, transparent); height: 10px; margin-bottom: 0; }
+.figure .key { margin: 0 2px 2px 4px; }
+.btn { font: 500 13px/1 var(--sans); padding: 8px 12px; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); color: var(--ink); text-decoration: none; cursor: pointer; white-space: nowrap; display: inline-flex; align-items: center; gap: 6px; }
+.btn:hover { border-color: var(--accent); color: var(--accent-ink); }
+.btn svg { width: 14px; height: 14px; }
+
+/* ---------- news ---------- */
+.news { list-style: none; padding: 0; margin: 0; }
+.news li { display: grid; grid-template-columns: 84px minmax(0, 1fr); gap: 16px; padding: 7px 0; }
+.news time { font: 500 13.5px/1.95 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; }
+.news li.more { display: none; }
+.news.open li.more { display: grid; }
+.more-btn { margin-top: 8px; }
+
+/* ---------- publications ---------- */
+.pub { display: grid; grid-template-columns: 44px minmax(0, 1fr); gap: 12px; padding: 20px 0; border-top: 1px solid var(--rule); }
+.pub:first-of-type { border-top: 0; padding-top: 4px; }
+.pub-key { font: 600 14px/1.95 var(--sans); color: var(--accent-ink); }
+.pub h3, .entry h3 { font: 600 18.5px/1.42 var(--serif); margin: 0 0 6px; }
+.pub h3 a { color: inherit; text-decoration: none; }
+.pub h3 a:hover { color: var(--accent-ink); text-decoration: underline; text-decoration-color: currentColor; }
+.authors, .venue { margin: 0; font-size: 16px; }
+.venue { color: var(--muted); }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; list-style: none; padding: 0; margin: 11px 0 0; }
+.chips li { font: 500 12.5px/1 var(--sans); padding: 6px 8px; border-radius: 4px; background: var(--accent-soft); color: var(--accent-ink); }
+.chips li.plain { background: transparent; border: 1px solid var(--rule); color: var(--muted); padding: 5px 7px; }
+.actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 13px; }
+.bib { margin-top: 12px; }
+.bib[hidden] { display: none; }
+.bib pre { font: 12.5px/1.6 var(--mono); background: var(--surface); color: var(--ink); padding: 14px 16px; border-radius: 6px; overflow-x: auto; margin: 0 0 8px; white-space: pre; }
+
+/* ---------- research / projects ---------- */
+.entry { padding: 20px 0; border-top: 1px solid var(--rule); }
+.entry:first-of-type { border-top: 0; padding-top: 4px; }
+.entry-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; column-gap: 20px; }
+.entry-head h3 { flex: 1 1 360px; }
+.when { font: 500 13.5px/1.6 var(--sans); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.meta { font: 400 14.5px/1.55 var(--sans); color: var(--muted); margin: 0 0 9px; }
+.meta a { color: var(--muted); }
+.entry p:last-child, .entry ul:last-child { margin-bottom: 0; }
+.entry ul { margin: 0; padding-left: 1.1em; }
+.entry ul li { margin: 4px 0; }
+.entry ul li::marker { color: var(--accent); }
+.out { font: 500 13.5px var(--sans); margin-top: 9px; display: inline-block; }
+
+/* ---------- honors ---------- */
+.awards { list-style: none; padding: 0; margin: 0; }
+.awards li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; padding: 10px 0; border-top: 1px solid var(--rule); }
+.awards li:first-child { border-top: 0; }
+.awards .note { font: 400 13.5px var(--sans); color: var(--muted); }
+.awards time { font: 500 13.5px/1.95 var(--sans); color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.tag { font: 600 12px/1 var(--sans); color: var(--accent-ink); background: var(--accent-soft); padding: 4px 6px; border-radius: 4px; margin-right: 6px; vertical-align: 2px; text-decoration: none; }
+
+/* ---------- education ---------- */
+.standing { font-size: 16.5px; }
+.courses { list-style: none; padding: 0; margin: 10px 0 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); column-gap: 32px; }
+.courses li { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px solid var(--rule); font-size: 15.5px; }
+.courses .score { font: 500 13.5px/1.9 var(--sans); color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+
+.plainlist { margin: 0; padding-left: 1.1em; }
+.plainlist li { margin: 8px 0; }
+.plainlist li::marker { color: var(--accent); }
+
+footer { border-top: 1px solid var(--rule); }
+.foot { max-width: 1120px; margin: 0 auto; padding: 22px 24px 36px; font: 400 13.5px/1.6 var(--sans); color: var(--muted); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+.foot a { color: var(--muted); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 899px) {
+  .layout { grid-template-columns: minmax(0, 1fr); gap: 40px; padding-top: 28px; }
+  .profile { display: grid; grid-template-columns: 112px minmax(0, 1fr); grid-template-rows: auto auto 1fr; column-gap: 20px; align-items: start; }
+  .role + .role { margin-top: 2px; }
+  .portrait { grid-row: span 3; max-width: 112px; }
+  .profile h1 { margin-top: 2px; font-size: 27px; }
+  .contact { grid-column: 1 / -1; margin-top: 16px; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); column-gap: 16px; }
+  main { max-width: none; }
+  section { margin-top: 56px; }
+}
+@media (max-width: 640px) {
+  body { font-size: 16.5px; }
+  .topbar-inner { padding: 0 14px; gap: 10px; }
+  .brand { display: none; }
+  .nav { margin-left: -6px; }
+  .layout { padding: 22px 18px 56px; }
+  .news li { grid-template-columns: 70px minmax(0, 1fr); gap: 12px; }
+  .pub { grid-template-columns: 34px minmax(0, 1fr); gap: 8px; }
+  .figure figcaption { flex-direction: column; }
+  h2 { font-size: 24px; }
+}
+@media print {
+  .topbar, .figure, .actions, .more-btn, .skip { display: none !important; }
+  .news li.more { display: grid; }
+  .layout { display: block; padding: 0; }
+  .profile { position: static; }
+  body { font-size: 11pt; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#about">Yinhao Ding</a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#about">About</a>
+      <a href="#news">News</a>
+      <a href="#publications">Publications</a>
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#honors">Honors</a>
+      <a href="#education">Education</a>
+    </nav>
+    <button class="icon-btn" id="theme-btn" type="button" aria-label="Switch between light and dark theme" title="Light / dark">
+      <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+      <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+    </button>
+  </div>
+</header>
+
+<div class="layout">
+
+  <!-- ================= PROFILE ================= -->
+  <aside class="profile" aria-label="Profile">
+    <img class="portrait" src="assets/avatar.jpg" alt="Portrait of Yinhao Ding" width="480" height="600">
+    <h1>Yinhao Ding</h1>
+    <p class="role">B.S. student, Mathematics and Applied Mathematics</p>
+    <p class="role"><a href="https://math.xju.edu.cn/" target="_blank" rel="noopener">School of Mathematics and System Sciences</a>, Xinjiang University</p>
+    <ul class="contact">
+      <li><a href="mailto:yinhao_ding@163.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3.5 6.5 8.5 6 8.5-6"/></svg>
+        yinhao_ding@163.com</a></li>
+      <li><a href="mailto:yinhao_ding@163.com?subject=CV%20request">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></svg>
+        CV available on request</a></li>
+      <li><a href="https://github.com/yinhaoding" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg>
+        GitHub</a></li>
+      <!-- TODO: once you have these profiles, delete the comment markers and fill in your ID.
+      <li><a href="https://scholar.google.com/citations?user=YOUR_ID" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 9.5 12 4l10 5.5-10 5.5z"/><path d="M6 12v4.5c3.5 2.5 8.5 2.5 12 0V12"/></svg>
+        Google Scholar</a></li>
+      <li><a href="https://orcid.org/0000-0000-0000-0000" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 10v6M9 7.5v.01M12.5 10v6h1.5a3 3 0 0 0 0-6z"/></svg>
+        ORCID</a></li>
+      -->
+    </ul>
+  </aside>
+
+  <main id="main">
+
+    <!-- ================= ABOUT ================= -->
+    <section id="about" aria-labelledby="about-h">
+      <h2 id="about-h">About</h2>
+      <p>I am a final-year undergraduate in Mathematics and Applied Mathematics (Innovation Class) at Xinjiang University, ranked 1st of 134 in my major. Advised by Prof. Cheng Hu at the School of Mathematics and System Sciences, I study stability and synchronization of stochastic networked systems: how to steer noisy, multilayer networks onto a common trajectory within a guaranteed time, using control that is switched on only intermittently, sends quantized signals, and must tolerate deception attacks.</p>
+
+      <figure class="figure" id="sync-fig">
+        <canvas id="sync-canvas" role="img" aria-label="Simulation: ten noisy node trajectories converging onto a gold target orbit, with shaded intervals marking when control is switched on."></canvas>
+        <figcaption>
+          <p>A toy simulation of the problem I work on. Noisy nodes<span class="key key-node"></span> are pulled onto a target orbit<span class="key key-target"></span> only while control is switched on<span class="key key-on"></span>, at aperiodic intervals, and still synchronize in finite time. <span id="sync-readout"></span></p>
+          <button class="btn" id="sync-rerun" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            Run with new noise</button>
+        </figcaption>
+      </figure>
+
+      <p>This work began with a National Undergraduate Innovation Training Program project that I lead, published as <a href="#J1">[J1]</a>, and continues with Prof. Hu in <a href="#J2">[J2]</a> and <a href="#J3">[J3]</a>. I am now also exploring a data-driven version of the problem: synchronizing stochastic networks whose dynamics and couplings are known only through discrete snapshots.</p>
+
+      <h3 class="sub">Research interests</h3>
+      <ul class="interests">
+        <li>Fixed- and prescribed-time synchronization of stochastic multilayer networks</li>
+        <li>Intermittent, quantized and self-triggered control under deception attacks</li>
+        <li>Learning-assisted control with finite-sample guarantees</li>
+        <li>Data-driven modeling and control of complex systems</li>
+      </ul>
+    </section>
+
+    <!-- ================= NEWS ================= -->
+    <section id="news" aria-labelledby="news-h">
+      <h2 id="news-h">News</h2>
+      <ul class="news" id="news-list">
+        <li><time>2026</time><span>Paper <a href="#J1">[J1]</a> published in <em>Neurocomputing</em>, vol. 704.</span></li>
+        <li><time datetime="2026-05">May 2026</time><span>National Second Prize, National Market Survey &amp; Analysis Contest.</span></li>
+        <li><time datetime="2025-12">Dec 2025</time><span>Awarded the National Encouragement Scholarship; attended the CUMCM national award ceremony at Tsinghua University.</span></li>
+        <li><time datetime="2025-11">Nov 2025</time><span>National First Prize, China Undergraduate Mathematical Contest in Modeling (CUMCM), as team leader.</span></li>
+        <li><time datetime="2025-11">Nov 2025</time><span>National Third Prize, BeiTai TianYuan Scientific Computing Developer Contest.</span></li>
+        <li><time datetime="2025-10">Oct 2025</time><span>National Second Prize, National Statistical Modeling Contest.</span></li>
+        <li class="more"><time datetime="2025-08">Aug 2025</time><span>National First Prize, &ldquo;Huashu Cup&rdquo; Mathematical Modeling Contest.</span></li>
+        <li class="more"><time datetime="2025-06">Jun 2025</time><span>School-nominated one-week research exchange at Tsinghua University.</span></li>
+        <li class="more"><time datetime="2025-05">May 2025</time><span>Honorable Mention, MCM/ICM.</span></li>
+        <li class="more"><time datetime="2025-03">Mar 2025</time><span>Became Principal Investigator of a National Undergraduate Innovation Training Program project (No. 202510755121).</span></li>
+      </ul>
+      <button class="btn more-btn" id="news-toggle" type="button" aria-expanded="false" aria-controls="news-list">Show all news</button>
+    </section>
+
+    <!-- ================= PUBLICATIONS ================= -->
+    <section id="publications" aria-labelledby="pubs-h">
+      <h2 id="pubs-h">Publications</h2>
+      <p class="lede">First author on all items. * corresponding author.</p>
+
+      <article class="pub" id="J1">
+        <div class="pub-key">[J1]</div>
+        <div>
+          <h3><a href="https://www.sciencedirect.com/science/article/pii/S0925231226022472" target="_blank" rel="noopener">Fuzzy intermittent quantized control for fixed/prescribed-time synchronization of stochastic multilayered networks subject to deception attacks</a></h3>
+          <p class="authors"><strong>Y. Ding</strong>, S. Yang, W. Zhou, Y. Gao, and C. Hu*</p>
+          <p class="venue"><em>Neurocomputing</em>, vol. 704, art. no. 134849, 2026</p>
+          <ul class="chips" aria-label="Indexing and metrics">
+            <li>SCI</li><li>JCR Q1 (43/210, CS–AI)</li><li>CAS Tier 2</li><li>IF 6.5</li>
+          </ul>
+          <div class="actions">
+            <a class="btn" href="https://www.sciencedirect.com/science/article/pii/S0925231226022472" target="_blank" rel="noopener">Paper</a>
+            <a class="btn" href="https://doi.org/10.1016/j.neucom.2026.134849" target="_blank" rel="noopener">DOI</a>
+            <button class="btn bib-toggle" type="button" aria-expanded="false" aria-controls="bib-J1">BibTeX</button>
+            <a class="btn" href="#r-J1">Project</a>
+          </div>
+          <div class="bib" id="bib-J1" hidden>
+<pre>@article{Ding2026Fuzzy,
+  author  = {Ding, Yinhao and Yang, S. and Zhou, W. and Gao, Y. and Hu, Cheng},
+  title   = {Fuzzy intermittent quantized control for fixed/prescribed-time
+             synchronization of stochastic multilayered networks subject
+             to deception attacks},
+  journal = {Neurocomputing},
+  volume  = {704},
+  pages   = {134849},
+  year    = {2026},
+  doi     = {10.1016/j.neucom.2026.134849}
+}</pre>
+            <button class="btn copy-bib" type="button" data-target="bib-J1">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+              <span>Copy BibTeX</span></button>
+          </div>
+        </div>
+      </article>
+
+      <article class="pub" id="J2">
+        <div class="pub-key">[J2]</div>
+        <div>
+          <h3>Enhanced fixed/prescribed-time synchronization of stochastic multilayer networks: A generalized aperiodic intermittent control approach</h3>
+          <p class="authors"><strong>Y. Ding</strong> and C. Hu*</p>
+          <p class="venue">Manuscript in preparation, 2026</p>
+          <div class="actions"><a class="btn" href="#r-J2">Project</a></div>
+        </div>
+      </article>
+
+      <article class="pub" id="J3">
+        <div class="pub-key">[J3]</div>
+        <div>
+          <h3>Learning-assisted bounded-deficit self-triggered stabilization of stochastic systems under deception attacks</h3>
+          <p class="authors"><strong>Y. Ding</strong> and C. Hu*</p>
+          <p class="venue">Manuscript prepared for <em>IEEE Transactions on Automatic Control</em>, 2026</p>
+          <div class="actions"><a class="btn" href="#r-J3">Project</a></div>
+        </div>
+      </article>
+    </section>
+
+    <!-- ================= RESEARCH ================= -->
+    <section id="research" aria-labelledby="research-h">
+      <h2 id="research-h">Research experience</h2>
+      <p class="lede">Advisor: Prof. Cheng Hu, School of Mathematics and System Sciences, Xinjiang University. For [J1]–[J3], theory, Matlab/SDE validation and manuscript writing were done independently.</p>
+
+      <div class="entry" id="r-J1">
+        <div class="entry-head">
+          <h3>Finite-time synchronization control of stochastic multilayer networks</h3>
+          <span class="when">Mar 2025 – Dec 2026</span>
+        </div>
+        <p class="meta">Principal Investigator, National Undergraduate Innovation Training Program (No. 202510755121)</p>
+        <p>Proposed a fuzzy intermittent quantized control scheme whose <i>L</i><sub>2</sub>-type Lyapunov function removes the Jensen-inequality bottleneck of existing results, and relaxed strong connectivity by embedding the target orbit as a virtual node. Obtained fixed- and prescribed-time synchronization under deception attacks, with an image-encryption application.</p>
+        <a class="out" href="#J1">Published as [J1]</a>
+      </div>
+
+      <div class="entry" id="r-J2">
+        <div class="entry-head">
+          <h3>Generalized aperiodic intermittent synchronization of stochastic multilayer networks</h3>
+          <span class="when">Jan 2026 – present</span>
+        </div>
+        <p class="meta">Sole student researcher</p>
+        <p>Designed a partial-convexity interpolation mechanism that recycles the sublinear terms discarded by conventional estimates, and proved existence and uniqueness of the optimal threshold by nested parameter optimization. The result is an unconditionally tighter fixed-time bound, with the design extended from periodic to general aperiodic regimes.</p>
+        <a class="out" href="#J2">Manuscript [J2]</a>
+      </div>
+
+      <div class="entry" id="r-J3">
+        <div class="entry-head">
+          <h3>Learning-assisted dual self-triggered intermittent quantized control of stochastic systems</h3>
+          <span class="when">Mar 2026 – present</span>
+        </div>
+        <p class="meta">Sole student researcher</p>
+        <p>Established a bounded-deficit stability framework and a learning-assisted dual self-triggered controller. Dual MLPs learn the conditional mean and variance of open-loop state energy to adapt work/rest durations; trajectory-level split conformal calibration supplies a finite-sample excursion envelope; and a pathwise credit ceiling guarantees mean-square exponential stability under deception attacks.</p>
+        <a class="out" href="#J3">Manuscript [J3]</a>
+      </div>
+
+      <div class="entry" id="r-next">
+        <div class="entry-head">
+          <h3>Data-driven finite-time synchronization of stochastic networks with unknown dynamics</h3>
+          <span class="when">2026 – present</span>
+        </div>
+        <p class="meta">Ongoing idea</p>
+        <p>For stochastic sub-networks whose dynamics and interactions are unknown and observed only through discrete snapshots, the aim is to learn a simulatable deep-learning surrogate and design robustly compensated controllers that still achieve finite-time synchronization.</p>
+      </div>
+    </section>
+
+    <!-- ================= PROJECTS ================= -->
+    <section id="projects" aria-labelledby="projects-h">
+      <h2 id="projects-h">Modeling &amp; optimization projects</h2>
+      <p class="lede">Team leader (1st of 3) on all three. [M1]–[M3] match the awards below.</p>
+
+      <div class="entry" id="M1">
+        <div class="entry-head">
+          <h3>[M1] Thickness measurement of SiC and silicon epitaxial layers via infrared interferometry</h3>
+          <span class="when">Nov 2025</span>
+        </div>
+        <p class="meta">National First Prize, China Undergraduate Mathematical Contest in Modeling</p>
+        <p>Developed an adjacent-extremum method that eliminates a key unknown parameter, and a general physical criterion for automatic interference-regime classification, enabling high-precision epitaxial-layer thickness estimation beyond national-standard accuracy requirements.</p>
+      </div>
+
+      <div class="entry" id="M2">
+        <div class="entry-head">
+          <h3>[M2] Industrial cycle identification via machine learning and hidden Markov modeling</h3>
+          <span class="when">Oct 2025</span>
+        </div>
+        <p class="meta">National Second Prize, National Statistical Modeling Contest</p>
+        <p>Combined a Bayesian–BiLSTM–RF ensemble with an SOM–HMM dynamic evolution model to identify industrial-cycle regimes and deliver data-driven regional segmentation and decision support.</p>
+      </div>
+
+      <div class="entry" id="M3">
+        <div class="entry-head">
+          <h3>[M3] CVaR-constrained crop planning under uncertainty</h3>
+          <span class="when">Nov 2025</span>
+        </div>
+        <p class="meta">National Third Prize, BeiTai TianYuan Scientific Computing Developer Contest</p>
+        <p>Formulated CVaR-based stochastic and multi-objective crop-planning models; solved the former with QMC-DEGA and independent Gurobi verification, and the latter with an enhanced NSGA-II, followed by robust optimization under uncertainty.</p>
+      </div>
+    </section>
+
+    <!-- ================= HONORS ================= -->
+    <section id="honors" aria-labelledby="honors-h">
+      <h2 id="honors-h">Honors &amp; awards</h2>
+      <h3 class="sub" style="margin-top:0">National and international competitions</h3>
+      <ul class="awards">
+        <li><div><a class="tag" href="#M1">M1</a><strong>National First Prize</strong>, <a href="http://www.mcm.edu.cn/" target="_blank" rel="noopener">China Undergraduate Mathematical Contest in Modeling</a> (CUMCM) <span class="note">1st of 3</span></div><time datetime="2025-11">Nov 2025</time></li>
+        <li><div><a class="tag" href="#M2">M2</a><strong>National Second Prize</strong>, National Statistical Modeling Contest <span class="note">1st of 3</span></div><time datetime="2025-10">Oct 2025</time></li>
+        <li><div><a class="tag" href="#M3">M3</a><strong>National Third Prize</strong>, BeiTai TianYuan Scientific Computing Developer Contest <span class="note">1st of 3</span></div><time datetime="2025-11">Nov 2025</time></li>
+        <li><div><strong>National First Prize</strong>, &ldquo;Huashu Cup&rdquo; Mathematical Modeling Contest <span class="note">1st of 3</span></div><time datetime="2025-08">Aug 2025</time></li>
+        <li><div><strong>National Second Prize</strong>, National Market Survey &amp; Analysis Contest <span class="note">1st of 5</span></div><time datetime="2026-05">May 2026</time></li>
+        <li><div><strong>Honorable Mention</strong>, <a href="https://www.comap.com/contests/mcm-icm" target="_blank" rel="noopener">Mathematical Contest in Modeling / Interdisciplinary Contest in Modeling</a> (MCM/ICM) <span class="note">1st of 3</span></div><time datetime="2025-05">May 2025</time></li>
+      </ul>
+      <h3 class="sub">Scholarships and academic distinctions</h3>
+      <ul class="awards">
+        <li><div><strong>National Encouragement Scholarship</strong></div><time datetime="2025-12">Dec 2025</time></li>
+        <li><div><strong>First-Class Scholarship</strong>, Xinjiang Rural Credit Union</div><time datetime="2024-11">Nov 2024</time></li>
+        <li><div><strong>First Prize</strong>, University Analysis &amp; Advanced Algebra Contest <span class="note">with a CNY 10,000 research-study grant</span></div><time datetime="2024-05">May 2024</time></li>
+      </ul>
+    </section>
+
+    <!-- ================= EDUCATION ================= -->
+    <section id="education" aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <div class="entry">
+        <div class="entry-head">
+          <h3><a href="https://www.xju.edu.cn/" target="_blank" rel="noopener">Xinjiang University</a> (Project 211), Urumqi</h3>
+          <span class="when">Sep 2023 – Jun 2027 (expected)</span>
+        </div>
+        <p class="meta">B.S. in Mathematics and Applied Mathematics (Innovation Class), School of Mathematics and System Sciences</p>
+        <p class="standing">GPA <strong>4.40/5.0</strong>, weighted average <strong>93.92/100</strong>, ranked <strong>1st of 134</strong> in the major (top 1%).</p>
+        <h3 class="sub">Core courses</h3>
+        <ul class="courses">
+          <li><span>Advanced Algebra A / B</span><span class="score">99 / 91</span></li>
+          <li><span>Mathematical Analysis A / B / C</span><span class="score">96 / 93 / 93</span></li>
+          <li><span>Ordinary Differential Equations</span><span class="score">99</span></li>
+          <li><span>Partial Differential Equations</span><span class="score">94</span></li>
+          <li><span>Functional Analysis</span><span class="score">98</span></li>
+          <li><span>Mathematical Statistics</span><span class="score">98</span></li>
+          <li><span>Mathematical Software</span><span class="score">98</span></li>
+          <li><span>Operations Research and Optimization</span><span class="score">92</span></li>
+          <li><span>Numerical Methods</span><span class="score">91</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ================= ACTIVITIES & SKILLS ================= -->
+    <section id="activities" aria-labelledby="act-h">
+      <h2 id="act-h">Activities &amp; skills</h2>
+      <ul class="plainlist">
+        <li><strong>President, Mathematics Enthusiasts Association</strong>, and Class Academic Representative. Taught 10+ sessions of core mathematics courses and 2 pre-contest training lectures; organized contest experience-sharing forums, a Sudoku contest and Pi Day (2 university-level and 8 school-level events).</li>
+        <li><strong>Academic visits.</strong> School-nominated one-week research exchange at Tsinghua University (Jun 2025); invited to the BeiTai TianYuan Scientific Computing Developer Contest award ceremony at Peking University (Oct 2025); attended the CUMCM national award ceremony at Tsinghua University (Dec 2025).</li>
+        <li><strong>Technical.</strong> Matlab (numerical simulation of SDEs), Python with Gurobi (optimization), SPSS, AMOS (scale development), ArcGIS, LaTeX.</li>
+        <li><strong>Languages.</strong> Mandarin Chinese (native); English (CET-4: 465, CET-6: 447).</li>
+      </ul>
+    </section>
+
+  </main>
+</div>
+
+<footer>
+  <div class="foot">
+    <span>&copy; 2026 Yinhao Ding. Last updated September 2026.</span>
+    <span><a href="mailto:yinhao_ding@163.com">yinhao_ding@163.com</a></span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  'use strict';
+  var root = document.documentElement;
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------------- theme toggle ---------------- */
+  var themeBtn = document.getElementById('theme-btn');
+  function currentTheme() {
+    var t = root.getAttribute('data-theme');
+    if (t) return t;
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  themeBtn.addEventListener('click', function () {
+    var next = currentTheme() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('yd-theme', next); } catch (e) {}
+    if (window.__redrawSync) window.__redrawSync();
+  });
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    var onChange = function () { if (window.__redrawSync) window.__redrawSync(); };
+    if (mq.addEventListener) mq.addEventListener('change', onChange); else if (mq.addListener) mq.addListener(onChange);
+  }
+
+  /* ---------------- news toggle ---------------- */
+  var newsList = document.getElementById('news-list');
+  var newsBtn = document.getElementById('news-toggle');
+  newsBtn.addEventListener('click', function () {
+    var open = newsList.classList.toggle('open');
+    newsBtn.setAttribute('aria-expanded', String(open));
+    newsBtn.textContent = open ? 'Show less' : 'Show all news';
+  });
+
+  /* ---------------- BibTeX ---------------- */
+  Array.prototype.forEach.call(document.querySelectorAll('.bib-toggle'), function (btn) {
+    btn.addEventListener('click', function () {
+      var box = document.getElementById(btn.getAttribute('aria-controls'));
+      var open = box.hasAttribute('hidden');
+      if (open) box.removeAttribute('hidden'); else box.setAttribute('hidden', '');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+  });
+  Array.prototype.forEach.call(document.querySelectorAll('.copy-bib'), function (btn) {
+    btn.addEventListener('click', function () {
+      var text = document.getElementById(btn.getAttribute('data-target')).querySelector('pre').textContent;
+      var label = btn.querySelector('span');
+      function done(ok) { label.textContent = ok ? 'Copied' : 'Select the text above to copy'; setTimeout(function () { label.textContent = 'Copy BibTeX'; }, 1800); }
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(function () { done(true); }, function () { done(false); });
+        } else {
+          var ta = document.createElement('textarea'); ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+          document.body.appendChild(ta); ta.select(); var ok = document.execCommand('copy'); document.body.removeChild(ta); done(ok);
+        }
+      } catch (e) { done(false); }
+    });
+  });
+
+  /* ---------------- active section in nav ---------------- */
+  var nav = document.querySelector('.nav');
+  var navLinks = {};
+  Array.prototype.forEach.call(document.querySelectorAll('.nav a[href^="#"]'), function (a) { navLinks[a.getAttribute('href').slice(1)] = a; });
+  // On phones the nav scrolls sideways: show a fade while links are hidden, and keep the active link visible.
+  function updateNavFade() { nav.classList.toggle('has-more', nav.scrollWidth - nav.clientWidth - nav.scrollLeft > 4); }
+  function revealInNav(a) {
+    if (!a || nav.scrollWidth <= nav.clientWidth) return;
+    var nr = nav.getBoundingClientRect(), ar = a.getBoundingClientRect();
+    if (ar.left < nr.left) nav.scrollLeft -= nr.left - ar.left + 12;
+    else if (ar.right > nr.right - 36) nav.scrollLeft += ar.right - nr.right + 48;
+  }
+  nav.addEventListener('scroll', updateNavFade, { passive: true });
+  window.addEventListener('resize', updateNavFade);
+  updateNavFade();
+  if ('IntersectionObserver' in window) {
+    var visible = {};
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { visible[e.target.id] = e.isIntersecting; });
+      var ids = ['about', 'news', 'publications', 'research', 'projects', 'honors', 'education', 'activities'];
+      var active = null;
+      for (var i = 0; i < ids.length; i++) { if (visible[ids[i]]) { active = ids[i]; break; } }
+      if (active === 'activities') active = 'education';
+      Object.keys(navLinks).forEach(function (k) {
+        navLinks[k].classList.toggle('active', k === active);
+        if (k === active) navLinks[k].setAttribute('aria-current', 'true'); else navLinks[k].removeAttribute('aria-current');
+      });
+      revealInNav(navLinks[active]);
+    }, { rootMargin: '-72px 0px -55% 0px' });
+    Array.prototype.forEach.call(document.querySelectorAll('main section'), function (s) { io.observe(s); });
+  }
+
+  /* ---------------- synchronization simulation ----------------
+     Toy model, integrated with Euler–Maruyama:
+       e_i = x_i - s  (synchronization error of node i)
+       control on :  de = -(k1|e|^{1/2} + k2|e|^{3/2}) sgn(e) dt + sigma e dW   (fixed-time type)
+       control off:  de =  a e dt + sigma e dW                                   (errors drift apart)
+     with aperiodic on/off windows. Purely illustrative, not the model of any paper. */
+  var canvas = document.getElementById('sync-canvas');
+  var readout = document.getElementById('sync-readout');
+  var rerun = document.getElementById('sync-rerun');
+  var ctx = canvas.getContext('2d');
+  var T_END = 10, DT = 0.005, STEPS = Math.round(T_END / DT), N = 10, YMAX = 3.8;
+  var K1 = 0.8, K2 = 0.4, A = 0.9, SIGMA = 0.4;
+
+  function rng(seed) {
+    return function () {
+      seed |= 0; seed = seed + 0x6D2B79F5 | 0;
+      var t = Math.imul(seed ^ seed >>> 15, 1 | seed);
+      t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+      return ((t ^ t >>> 14) >>> 0) / 4294967296;
+    };
+  }
+  function gauss(r) { var u = 0; while (u === 0) u = r(); return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * r()); }
+  function target(t) { return 1.15 * Math.sin(1.1 * t) + 0.45 * Math.sin(2.4 * t + 0.6); }
+
+  function simulate(seed) {
+    var r = rng(seed), windows = [], t = 0, i, j;
+    while (t < T_END) {
+      var w = 0.7 + 0.6 * r();
+      windows.push([t, Math.min(t + w, T_END)]);
+      t += w + 0.25 + 0.35 * r();
+    }
+    var on = new Uint8Array(STEPS + 1);
+    windows.forEach(function (win) {
+      for (i = Math.round(win[0] / DT); i <= Math.min(STEPS, Math.round(win[1] / DT)); i++) on[i] = 1;
+    });
+    var e = [], xs = [], s = new Float32Array(STEPS + 1), settle = 0;
+    for (j = 0; j < N; j++) {
+      var mag = 1.2 + 1.5 * r();
+      e.push((j % 2 ? 1 : -1) * mag);
+      xs.push(new Float32Array(STEPS + 1));
+    }
+    var sq = Math.sqrt(DT);
+    for (i = 0; i <= STEPS; i++) {
+      s[i] = target(i * DT);
+      var maxAbs = 0;
+      for (j = 0; j < N; j++) {
+        var ej = e[j], a = Math.abs(ej), sg = ej > 0 ? 1 : ej < 0 ? -1 : 0;
+        xs[j][i] = s[i] + ej;
+        if (a > maxAbs) maxAbs = a;
+        var drift = on[i] ? -(K1 * Math.sqrt(a) + K2 * a * Math.sqrt(a)) * sg : A * ej;
+        var ne = ej + drift * DT + SIGMA * ej * sq * gauss(r);
+        if (on[i] && ne * sg < 0) ne = 0;      // no overshoot through zero
+        if (Math.abs(ne) < 2e-4) ne = 0;        // numerically synchronized
+        e[j] = ne;
+      }
+      if (maxAbs > 0.02) settle = i * DT;
+    }
+    return { xs: xs, s: s, windows: windows, settle: settle };
+  }
+
+  var sim = simulate(20260923), progress = 0, raf = 0, cssW = 0, cssH = 0;
+
+  function cssVar(name) { return getComputedStyle(root).getPropertyValue(name).trim(); }
+
+  function resize() {
+    var w = canvas.parentElement.clientWidth - 28;
+    if (w <= 0) return;
+    var h = Math.round(Math.max(190, Math.min(290, w * 0.38)));
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cssW = w; cssH = h;
+    canvas.style.height = h + 'px';
+    canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw(progress);
+  }
+
+  function draw(p) {
+    if (!cssW) return;
+    var W = cssW, H = cssH, L = 30, R = 10, Tp = 10, B = 24;
+    var pw = W - L - R, ph = H - Tp - B;
+    var X = function (t) { return L + t / T_END * pw; };
+    var Y = function (v) { return Tp + (1 - (v + YMAX) / (2 * YMAX)) * ph; };
+    var accent = cssVar('--accent'), gold = cssVar('--gold'), muted = cssVar('--muted'), rule = cssVar('--rule');
+    var sans = cssVar('--sans') || 'sans-serif';
+    var tNow = p * T_END, iNow = Math.floor(p * STEPS);
+    ctx.clearRect(0, 0, W, H);
+
+    // control-on windows (revealed as time advances)
+    ctx.fillStyle = accent; ctx.globalAlpha = 0.13;
+    sim.windows.forEach(function (w) {
+      if (w[0] >= tNow) return;
+      ctx.fillRect(X(w[0]), Tp, X(Math.min(w[1], tNow)) - X(w[0]), ph);
+    });
+    ctx.globalAlpha = 1;
+
+    // axes
+    ctx.strokeStyle = rule; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(L, Tp + ph + 0.5); ctx.lineTo(L + pw, Tp + ph + 0.5); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(L - 0.5, Tp); ctx.lineTo(L - 0.5, Tp + ph); ctx.stroke();
+    ctx.fillStyle = muted; ctx.font = '500 11px ' + sans; ctx.textAlign = 'center'; ctx.textBaseline = 'top';
+    for (var k = 0; k <= T_END; k += 2) {
+      ctx.fillText(String(k), X(k), Tp + ph + 6);
+      ctx.beginPath(); ctx.moveTo(X(k) + 0.5, Tp + ph); ctx.lineTo(X(k) + 0.5, Tp + ph + 3); ctx.stroke();
+    }
+    ctx.textAlign = 'right'; ctx.textBaseline = 'middle';
+    ctx.fillText('t', L + pw, Tp + ph - 9);
+    ctx.textAlign = 'left'; ctx.fillText('x(t)', L + 6, Tp + 7);
+
+    if (iNow < 1) return;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(L, Tp, pw, ph); ctx.clip();
+    var stride = Math.max(1, Math.floor(STEPS / (pw * 1.5)));
+    // node trajectories
+    ctx.strokeStyle = accent; ctx.globalAlpha = 0.55; ctx.lineWidth = 1.15; ctx.lineJoin = 'round';
+    sim.xs.forEach(function (x) {
+      ctx.beginPath(); ctx.moveTo(X(0), Y(x[0]));
+      for (var i = stride; i <= iNow; i += stride) ctx.lineTo(X(i * DT), Y(x[i]));
+      ctx.lineTo(X(iNow * DT), Y(x[iNow]));
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+    // target orbit
+    ctx.strokeStyle = gold; ctx.lineWidth = 2.4;
+    ctx.beginPath(); ctx.moveTo(X(0), Y(sim.s[0]));
+    for (var i2 = stride; i2 <= iNow; i2 += stride) ctx.lineTo(X(i2 * DT), Y(sim.s[i2]));
+    ctx.stroke();
+    ctx.restore();
+
+    // settling time marker
+    if (tNow >= sim.settle && sim.settle > 0) {
+      var xs = Math.round(X(sim.settle)) + 0.5;
+      ctx.strokeStyle = muted; ctx.lineWidth = 1; ctx.setLineDash([3, 3]);
+      ctx.beginPath(); ctx.moveTo(xs, Tp); ctx.lineTo(xs, Tp + ph); ctx.stroke(); ctx.setLineDash([]);
+      ctx.fillStyle = muted; ctx.font = '500 11px ' + sans; ctx.textBaseline = 'top';
+      var label = 'synchronized, t \u2248 ' + sim.settle.toFixed(1);
+      var tw = ctx.measureText(label).width;
+      var right = xs + 6 + tw < L + pw;
+      ctx.textAlign = right ? 'left' : 'right';
+      ctx.fillText(label, right ? xs + 6 : xs - 6, Tp + 4);
+    }
+  }
+
+  function updateReadout() {
+    readout.textContent = sim.settle > 0 ? 'In this run: synchronized at t \u2248 ' + sim.settle.toFixed(1) + '.' : '';
+  }
+
+  function play() {
+    cancelAnimationFrame(raf);
+    updateReadout();
+    if (reduceMotion) { progress = 1; draw(1); return; }
+    var start = null, dur = 4200;
+    function step(now) {
+      if (start === null) start = now;
+      progress = Math.min(1, (now - start) / dur);
+      draw(progress);
+      if (progress < 1) raf = requestAnimationFrame(step);
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  window.__redrawSync = function () { draw(progress); };
+  rerun.addEventListener('click', function () {
+    sim = simulate((Math.random() * 1e9) | 0);
+    progress = 0;
+    play();
+  });
+
+  if ('ResizeObserver' in window) new ResizeObserver(resize).observe(canvas.parentElement);
+  else window.addEventListener('resize', resize);
+  resize();
+
+  // start the single page-load animation once the figure is on screen
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var started = false;
+    var fio = new IntersectionObserver(function (entries) {
+      if (!started && entries[0].isIntersecting) { started = true; play(); fio.disconnect(); }
+    }, { threshold: 0.35 });
+    fio.observe(canvas);
+  } else { play(); }
+})();
+</script>
+</body>
+</html>
